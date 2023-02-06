@@ -36,6 +36,7 @@ def populate():
         'Django': {'pages': django_pages},
         'Other Frameworks': {'pages': other_pages} }
 
+
     for cat, cat_data in cats.items():
         c = add_cat(cat)
         for p in cat_data['pages']:
@@ -52,8 +53,15 @@ def add_page(cat, title, url, views=0):
     p.save()
     return p
 
+cat_views_likes = {
+    'Python': {'views': 128, 'likes': 64},
+    'Django': {'views': 64, 'likes': 32},
+    'Other Frameworks': {'views': 32, 'likes': 16, } }
+
 def add_cat(name):
     c = Category.objects.get_or_create(name=name)[0]
+    c.views = cat_views_likes[c.name]['views']
+    c.likes = cat_views_likes[c.name]['likes']
     c.save()
     return c
 
