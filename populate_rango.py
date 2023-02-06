@@ -1,6 +1,7 @@
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                         'tango_with_django_project.settings')
+from random import randint
 
 import django
 django.setup()
@@ -50,6 +51,8 @@ def add_page(cat, title, url, views=0):
     p = Page.objects.get_or_create(category=cat, title=title)[0]
     p.url=url
     p.views=views
+    if (p.views == 0):
+        p.views = randint(1,101)
     p.save()
     return p
 
