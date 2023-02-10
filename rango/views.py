@@ -63,7 +63,6 @@ def add_page(request, category_name_slug):
 
     if request.method == 'POST':
         form = PageForm(request.POST)
-        print(":b:ost")
         if form.is_valid():
             if category:
                 page = form.save(commit=False)
